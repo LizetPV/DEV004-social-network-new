@@ -1,9 +1,12 @@
+*{
+    font-family: Futura, Helvetica, sans-serif;
+}
 html {
     display: flex;
     justify-content: center;
 }
 #taskContainer{
-    top: 44%;
+    top: 38%;
     position: absolute;
     width: 50%;
     right: 22%;
@@ -30,12 +33,7 @@ html {
 #email-error {
     color: red;
 }
-#section {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin: 137% 0 0 0;
-}
+
 #fondo {
     display: flex;
     width: 100%;
@@ -48,10 +46,26 @@ html {
 }
 #root {
     display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 137% 0 0 0;
+    display: flex;
     justify-content: center;
+}
+#emailAndPassword{
+    display: contents;
 }
 .title {
     background-color: blueviolet;
+}
+#registerStyle{
+    display: contents;
+}
+#logoRegister{
+    position: absolute;
+    top: 9%;
+    right: 22%;
+    width: 58%;
 }
 h2 {
     background-image: url(./imagenes/logo.png);
@@ -157,14 +171,16 @@ h2 {
 }
 .send {
     position: absolute;
-    top: 72%;
-    width: 18%;
-    height: 21%;
+    top: 74%;
+    width: 15%;
+    height: 14%;
     background: #14EDDD;
-    border-radius: 5px;
+    border-radius: 10px;
     border: none;
     font-weight: bold;
     left: 75%;
+    font-size: 0.8rem;
+    padding: 1% 2% 0% 5%;
 }
 .edit {
     position: relative;
@@ -208,20 +224,27 @@ h2 {
     width: 66%;
     display: flex;
     height: 11%;
-    border-color: #EF104C;
+    background-color: #ebebeb;
+    border: none;
     position: absolute;
     top: 19%;
-    left: 18%;
+    left: 16%;
     border-radius: 10px;
+    padding: 1% 1% 1% 4%;
 }
+
 .buttonSingOff {
-   position: absolute;
+    position: absolute;
     top: 5%;
-    left: 68%;
-    background: white;
-    border-color: #14EDDD;
-    border-radius: 8px;
-    font-weight: bold;
+    left: 64%;
+    border-radius: 20px;
+    padding: 1% 0% 1% 5%;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border: 2px solid #14EDDD;
+    width: 26%;
+    background-color: white;
+    color: #646464;
 }
 #dialog {
     width: 73%;

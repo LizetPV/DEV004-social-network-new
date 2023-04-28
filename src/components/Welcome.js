@@ -6,7 +6,7 @@ import { onNavigate } from '../router.js';
 import {userData} from '../store/userData.js'
 
 export const welcome = () => {
-  const div = document.createElement('div');
+  const section = document.createElement('section');
   const logo = document.createElement('img');
   const fondo = document.createElement('img');
   const title = document.createElement('h2');
@@ -28,7 +28,7 @@ export const welcome = () => {
   
   logo.id = 'logo';
   fondo.id = 'fondo';
-  div.id = 'section';
+  section.id = 'emailAndPassword';
   inputPassword.id = 'password';
   inputUsername.id = 'username';
   
@@ -78,7 +78,7 @@ export const welcome = () => {
   });
   
 
-  div.append(
+  section.append(
     title,
     logo,
     fondo,
@@ -90,5 +90,5 @@ export const welcome = () => {
     buttonCreate,
   );
 
-  return div;
+  return section;
 };

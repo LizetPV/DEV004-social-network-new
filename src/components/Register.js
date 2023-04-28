@@ -1,9 +1,9 @@
+import { getAuth, updateProfile } from 'firebase/auth';
 import { logincreateUserWithEmailAndPassword} from '../Firebase/authentication.js';
-import { getAuth, updateProfile } from "firebase/auth";
 import { onNavigate } from '../router.js';
 
 export const register = () => {
-  const div = document.createElement('div');
+  const section = document.createElement('section');
   const logo = document.createElement('img');
   const fondo = document.createElement('img');
   const title = document.createElement('h2');
@@ -19,9 +19,10 @@ export const register = () => {
 
   inputPass.type = 'password';
 
-  div.id = 'section';
+  section.id = 'registerStyle';
   fondo.id = 'fondo';
   emailError.id = 'email-error'; 
+  logo.id = 'logoRegister'
 
   buttonRegister.className = 'buttonRegister';
   inputEmail.className = 'email';
@@ -55,7 +56,7 @@ export const register = () => {
     emailError.style.display = 'none'; // ocultar el mensaje por defecto
   });
 
-  div.append(
+  section.append(
     title,
     logo,
     fondo,
@@ -65,5 +66,5 @@ export const register = () => {
     buttonRegister,
   );
 
-  return div;
+  return section;
 };

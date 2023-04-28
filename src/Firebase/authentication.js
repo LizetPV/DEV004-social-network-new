@@ -1,10 +1,9 @@
 import {
   getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup,
-  signInWithEmailAndPassword, onAuthStateChanged
+  signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { collection, addDoc, query, onSnapshot, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from './firebase';
-import { userData } from '../store/userData.js';
 
 const provider = new GoogleAuthProvider();
 
