@@ -1,8 +1,8 @@
 import {
   post,
-  getPost,
-  deletePosta,
-  editPost,
+  //getPost,
+  //deletePosta,
+  //editPost,
 } from "../Firebase/authentication";
 import { onNavigate } from "../router.js";
 
