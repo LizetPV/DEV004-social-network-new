@@ -1,7 +1,6 @@
 import { post, getPost, deletePosta, editPost } from "../Firebase/authentication";
 import { onNavigate } from "../router.js";
 
-
 export const wall = () => {
   const buttonSend = document.createElement("btn");
   const inputShowModal = document.createElement("textarea");
@@ -20,13 +19,16 @@ export const wall = () => {
   const buttonSingOff = document.createElement("btn");
   let buttonsShowModal = document.createElement("img", "btn");
   let inputPost = document.createElement("input");
+
   inputShowModal.placeholder = "¿ Qué estás pensando ... ?";
   inputPost.placeholder = "¿ Qué estás pensando ... ?";
+
   inputPost.type = "texto";
   imgUser.type = "img";
   buttonsShowModal.type = "btn";
   buttonxIcon.type = "btn";
   buttonxIcon2.type = "btn";
+
   fondo.id = "fondo";
   div.id = "section";
   logo2.id = "logo2";
@@ -35,13 +37,14 @@ export const wall = () => {
   inputPost.id = "post";
   imgUser.id = "imgUser";
   taskContainer.id = "taskContainer";
-  buttonSend.textContent = "SEND";
 
+  buttonSend.textContent = "SEND";
   buttonSingOff.textContent = "Cerrar Sesión";
+
   buttonSend.className = "send";
   buttonxIcon.className = "buttonX";
   buttonxIcon2.className = "buttonX2";
-  buttonsShowModal.className = "ButtonsShowModal";
+ // buttonsShowModal.className = "ButtonsShowModal";
   likeEmptyIcon.className = "likeEmptyIcon";
   likeFullIcon.className = "likeFullIcon";
   commentIcon.className = "iconComment";
@@ -69,8 +72,7 @@ export const wall = () => {
   getPost((querySnapshot) => {
     const listPost = document.createElement('article')
     listPost.innerHTML = ''
-    taskContainer.innerHTML = '' 
-
+    taskContainer.innerHTML = ''
     querySnapshot.forEach(doc => {
       console.log(doc.data());
       let pruebaPost = document.createElement("p");
@@ -85,7 +87,6 @@ export const wall = () => {
       btnUpdate.setAttribute('style', 'display:none')
       btnUpdate.className = 'btnUpdate';
       btnUpdate.value = doc.id
-
       const buttonDeleteIcon = document.createElement("img");
       const buttonEditIcon = document.createElement("img");
       const inputComment = document.createElement("input");
@@ -101,14 +102,11 @@ export const wall = () => {
       buttonEditIcon.alt = "Edit";
       inputComment.id = "comment";
       inputComment.type = "texto";
-
       const input = document.createElement("textarea");
       const likeEmptyIconClone = likeEmptyIcon.cloneNode(true);
       const likeFullIconClone = likeFullIcon.cloneNode(true);
       const commentIconClone = commentIcon.cloneNode(true);
-
       input.id = "comments";
-
       input.value = doc.data().contenido;
       console.log(doc.data().contenido);
       let liked = false;
@@ -122,8 +120,6 @@ export const wall = () => {
         } else {
         }
       });
-
-
       likeFullIconClone.addEventListener("click", () => {
         if (liked) {
           likeEmptyIconClone.src = "./imagenes/likeVacio.png";
@@ -137,16 +133,14 @@ export const wall = () => {
       listPost.append(input, likeEmptyIconClone, likeFullIconClone, pruebaPost,
         btnUpdate, buttonDeleteIcon, buttonEditIcon, buttonDeleteIcon, buttonEditIcon)
       taskContainer.append(listPost)
-
       const btnEdit = document.getElementById("edit" + doc.id);
-
       btnEdit.addEventListener('click', (e) => {
-        const textoEditado = document.getElementById("comments").value;
+        // const textoEditado = document.getElementById("comments").value;
+        const textoEditado = input.value;
         console.log('Guardando...', textoEditado);
         editPost(e.target.dataset.id, textoEditado)
       })
     });
-
     const btnDelete = taskContainer.querySelectorAll(".delete")
     btnDelete.forEach(btn => {
       btn.addEventListener('click', ({ target: { dataset } }) => {
@@ -165,7 +159,6 @@ export const wall = () => {
     task.textContent = inputShowModal.value;
     const taskContainer = document.querySelector("#taskContainer"); // Obtener el elemento que contenerá las tareas
     if (taskContainer) {
-
       taskContainer.appendChild(task);
       console.log(taskContainer);
     } else {
@@ -193,7 +186,6 @@ export const wall = () => {
   dialog.appendChild(buttonSend);
   dialog.appendChild(buttonxIcon);
   dialogAjustes.appendChild(buttonsShowModal);
-
   dialogAjustes.appendChild(buttonxIcon2);
   div.append(
     dialog,
