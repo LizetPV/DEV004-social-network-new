@@ -54,7 +54,7 @@ html {
     background-color: blueviolet;
 }
 h2 {
-    background-image: url(./imagenes/logo.png);
+    background-image: url(/assets/logo.1da5a44e.png);
 }
 .email {
     border: none;
@@ -215,7 +215,7 @@ h2 {
     border-radius: 10px;
 }
 .buttonSingOff {
-   position: absolute;
+    position: absolute;
     top: 5%;
     left: 68%;
     background: white;
@@ -287,6 +287,9 @@ h2 {
     margin: -4% 25% 30% -22%;
     position: relative;
     top: 30%;
+}
+#listPost{
+
 }
 .inputUpdate{
     background: #F3F1F1;
