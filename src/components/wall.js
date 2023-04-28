@@ -1,10 +1,6 @@
-import {
-  post,
-  //getPost,
-  //deletePosta,
-  //editPost,
-} from "../Firebase/authentication";
+import { post, getPost, deletePosta, editPost } from "../Firebase/authentication";
 import { onNavigate } from "../router.js";
+
 
 export const wall = () => {
   const buttonSend = document.createElement("btn");
@@ -24,7 +20,6 @@ export const wall = () => {
   const buttonSingOff = document.createElement("btn");
   let buttonsShowModal = document.createElement("img", "btn");
   let inputPost = document.createElement("input");
-
   inputShowModal.placeholder = "¿ Qué estás pensando ... ?";
   inputPost.placeholder = "¿ Qué estás pensando ... ?";
   inputPost.type = "texto";
@@ -71,27 +66,32 @@ export const wall = () => {
   buttonxIcon.alt = "equis";
   buttonxIcon2.src = "./imagenes/x.png";
   buttonxIcon2.alt = "equis";
-
   getPost((querySnapshot) => {
-    const listPost = document.createElement("article");
-    listPost.innerHTML = "";
-    taskContainer.innerHTML = "";
+    const listPost = document.createElement('article')
+    listPost.innerHTML = ''
+    taskContainer.innerHTML = '' 
 
-    querySnapshot.forEach((doc) => {
+    querySnapshot.forEach(doc => {
       console.log(doc.data());
-
-      const inputEdit = document.createElement("textarea");
-      inputEdit.id = "comments";
-      inputEdit.textContent = doc.data().contenido;
-      console.log(inputEdit);
-
+      let pruebaPost = document.createElement("p");
+      pruebaPost.textContent = doc.data().contenido;
+      const inputUpdate = document.createElement('input')
+      inputUpdate.setAttribute('value', doc.data().contenido)
+      inputUpdate.setAttribute('style', 'display:none')
+      inputUpdate.className = 'inputUpdate';
+      inputUpdate.id = doc.id
+      const btnUpdate = document.createElement('button')
+      btnUpdate.textContent = 'Guardar'
+      btnUpdate.setAttribute('style', 'display:none')
+      btnUpdate.className = 'btnUpdate';
+      btnUpdate.value = doc.id
 
       const buttonDeleteIcon = document.createElement("img");
       const buttonEditIcon = document.createElement("img");
-
-      buttonDeleteIcon.setAttribute("data-id", doc.id);
-      buttonEditIcon.setAttribute("data-id", doc.id);
-      //pruebaPost.id = "comment";
+      const inputComment = document.createElement("input");
+      buttonDeleteIcon.setAttribute('data-id', doc.id)
+      buttonEditIcon.setAttribute('data-id', doc.id)
+      pruebaPost.id = "comment";
       buttonEditIcon.className = "edit";
       buttonEditIcon.id = "edit" + doc.id;
       buttonDeleteIcon.src = "./imagenes/buttonDeleteIcon.png";
@@ -99,16 +99,19 @@ export const wall = () => {
       buttonDeleteIcon.className = "delete";
       buttonEditIcon.src = "./imagenes/buttonEditIcon.png";
       buttonEditIcon.alt = "Edit";
-  
+      inputComment.id = "comment";
+      inputComment.type = "texto";
 
-      
+      const input = document.createElement("textarea");
       const likeEmptyIconClone = likeEmptyIcon.cloneNode(true);
       const likeFullIconClone = likeFullIcon.cloneNode(true);
+      const commentIconClone = commentIcon.cloneNode(true);
 
-      
+      input.id = "comments";
 
-      
-      const liked = false;
+      input.value = doc.data().contenido;
+      console.log(doc.data().contenido);
+      let liked = false;
       likeEmptyIconClone.addEventListener("click", () => {
         if (!liked) {
           likeFullIconClone.src = "./imagenes/likeLleno.png";
@@ -120,6 +123,7 @@ export const wall = () => {
         }
       });
 
+
       likeFullIconClone.addEventListener("click", () => {
         if (liked) {
           likeEmptyIconClone.src = "./imagenes/likeVacio.png";
@@ -130,38 +134,26 @@ export const wall = () => {
         } else {
         }
       });
+      listPost.append(input, likeEmptyIconClone, likeFullIconClone, pruebaPost,
+        btnUpdate, buttonDeleteIcon, buttonEditIcon, buttonDeleteIcon, buttonEditIcon)
+      taskContainer.append(listPost)
 
-      listPost.append(
-        inputEdit,
-        likeEmptyIconClone,
-        likeFullIconClone,
-        buttonDeleteIcon,
-        buttonEditIcon
-      );
-      taskContainer.append(listPost);
+      const btnEdit = document.getElementById("edit" + doc.id);
+
+      btnEdit.addEventListener('click', (e) => {
+        const textoEditado = document.getElementById("comments").value;
+        console.log('Guardando...', textoEditado);
+        editPost(e.target.dataset.id, textoEditado)
+      })
     });
 
-
-      const btnEdit = listPost.querySelectorAll(".edit");
-      btnEdit.forEach((btn) => {
-        btn.addEventListener("click", ({ target: { dataset } }) => {
-          
-          const commentContainer = document.querySelector(`[data-id="${dataset.id}"]`);
-          const textoEditado = inputEdit.value; 
-          //const textoEditado = commentContainer.querySelector(".comments").value;
-          console.log('Guardando...', textoEditado);
-          editPost(dataset.id, textoEditado)
-        }) 
+    const btnDelete = taskContainer.querySelectorAll(".delete")
+    btnDelete.forEach(btn => {
+      btn.addEventListener('click', ({ target: { dataset } }) => {
+        deletePosta(dataset.id)
       })
+    })
 
-      const btnDelete = listPost.querySelectorAll(".delete");
-      btnDelete.forEach((btn) => {
-        btn.addEventListener("click", ({ target: { dataset } }) => {
-          deletePosta(dataset.id);
-        });
-      });
-
-    
   });
 
   buttonSend.addEventListener("click", () => {
@@ -173,6 +165,7 @@ export const wall = () => {
     task.textContent = inputShowModal.value;
     const taskContainer = document.querySelector("#taskContainer"); // Obtener el elemento que contenerá las tareas
     if (taskContainer) {
+
       taskContainer.appendChild(task);
       console.log(taskContainer);
     } else {
@@ -183,7 +176,7 @@ export const wall = () => {
 
   inputPost.addEventListener("click", function () {
     dialog.showModal();
-  });
+  }); 
 
   buttonxIcon.addEventListener("click", function () {
     dialog.close();
@@ -194,7 +187,8 @@ export const wall = () => {
   buttonSingOff.addEventListener("click", () => {
     onNavigate("/");
   });
-
+  
+  
   dialog.appendChild(inputShowModal);
   dialog.appendChild(buttonSend);
   dialog.appendChild(buttonxIcon);
