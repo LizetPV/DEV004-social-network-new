@@ -4,7 +4,7 @@ import {
   deletePosta,
   editPost,
 } from '../Firebase/authentication';
-import { onNavigate } from '../router.js';
+import { onNavigate } from '../router';
 
 export const wall = () => {
   const buttonSend = document.createElement('btn');
@@ -88,7 +88,6 @@ export const wall = () => {
       const likeFullIconClone = likeFullIcon.cloneNode(true);
 
       postContent.value = doc.data().contenido;
-      console.log(doc.data().contenido);
 
       let liked = false;
       likeEmptyIconClone.addEventListener('click', () => {
@@ -97,8 +96,7 @@ export const wall = () => {
           likeFullIconClone.style.display = 'block';
           likeEmptyIconClone.style.display = 'none';
           liked = true;
-          console.log('liked');
-        } else {
+          // console.log('liked');
         }
       });
       likeFullIconClone.addEventListener('click', () => {
@@ -107,8 +105,7 @@ export const wall = () => {
           likeEmptyIconClone.style.display = 'block';
           likeFullIconClone.style.display = 'none';
           liked = false;
-          console.log('no liked');
-        } else {
+          // console.log('no liked');
         }
       });
       listPost.append(
@@ -118,7 +115,7 @@ export const wall = () => {
         buttonDeleteIcon,
         buttonEditIcon,
         buttonDeleteIcon,
-        buttonEditIcon
+        buttonEditIcon,
       );
       taskContainer.append(listPost);
 
@@ -141,14 +138,13 @@ export const wall = () => {
   buttonSend.addEventListener('click', () => {
     post(inputShowModal.value).then((response) => response);
     dialog.close();
-    const task = document.createElement('p');
-    task.textContent = inputShowModal.value;
+    const contentNew = inputShowModal.value;
     const container = document.querySelector('#taskContainer'); // Obtener el elemento que contenerá las tareas
     if (container) {
-      taskContainer.appendChild(task);
-      // console.log(container);
+      taskContainer.append(contentNew);
+      console.log(contentNew);
     } else {
-      console.error('No se encontró el elemento que contiene las tareas');
+      alert('No se encontró el elemento que contiene las tareas');
     }
     inputShowModal.value = '';
   });
@@ -175,7 +171,7 @@ export const wall = () => {
     inputPost,
     taskContainer,
     imgUser,
-    buttonSingOff
+    buttonSingOff,
   );
   return section;
 };

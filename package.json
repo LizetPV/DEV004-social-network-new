@@ -20,16 +20,20 @@
     "start": "npm run dev -s",
     "build": "vite build",
     "preview": "vite preview",
-    "clear-cache": "rm -rf node_modules/.vite"
+    "clear-cache": "rm -rf node_modules/.vite",
+    "format": "prettier --write .",
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@babel/preset-env": "^7.19.4",
-    "eslint": "^8.3.0",
+    "eslint": "^8.39.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.18.2",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jest": "^25.3.0",
     "htmlhint": "^1.0.0",
     "jest": "^27.0.1",
+    "prettier": "^2.8.8",
     "regenerator-runtime": "^0.13.1",
     "stylelint": "^14.1.0",
     "stylelint-config-recommended": "^6.0.0",

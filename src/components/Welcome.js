@@ -1,9 +1,9 @@
 import {
-   loginGoogle,
-   loginWithEmailAndPassword,
-} from '../Firebase/authentication.js';
-import { onNavigate } from '../router.js';
-import {userData} from '../store/userData.js'
+  loginGoogle,
+  loginWithEmailAndPassword,
+} from '../Firebase/authentication';
+import { onNavigate } from '../router';
+import { userData } from '../store/userData';
 
 export const welcome = () => {
   const section = document.createElement('section');
@@ -16,22 +16,20 @@ export const welcome = () => {
   const buttonCreate = document.createElement('button');
   const inputPassword = document.createElement('input');
   const inputUsername = document.createElement('input');
-  
 
   inputUsername.type = 'email';
   inputUsername.required = 'true';
   inputPassword.type = 'password';
-  inputPassword.required= 'true';
+  inputPassword.required = 'true';
 
   inputUsername.placeholder = 'e-mail';
   inputPassword.placeholder = 'password';
-  
+
   logo.id = 'logo';
   fondo.id = 'fondo';
   section.id = 'emailAndPassword';
   inputPassword.id = 'password';
   inputUsername.id = 'username';
-  
 
   title.className = 'title';
   buttonGetinto.className = 'buttonGetinto';
@@ -76,7 +74,6 @@ export const welcome = () => {
       onNavigate('/wall');
     });
   });
-  
 
   section.append(
     title,
